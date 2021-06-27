@@ -103,3 +103,7 @@ buildNumber.properties
 # Cursive Clojure plugin
 .idea/replstate.xml
 
+*build/
+
+.DS_Store
+.gitignore.swp
