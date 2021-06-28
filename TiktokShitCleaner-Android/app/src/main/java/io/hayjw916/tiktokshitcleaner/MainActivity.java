@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
             try {
                 if (uri.toString().contains("image")) {
                     decisionText.setText("This video contains an image!");
+                } else {
+                    videoView.setVideoPath(uri.getPath());
+                    videoView.start();
                 }
-                videoView.setVideoPath(uri.toString());
-                videoView.start();
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
