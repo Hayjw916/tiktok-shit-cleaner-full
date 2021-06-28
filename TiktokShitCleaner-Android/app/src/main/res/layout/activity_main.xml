@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.289" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <TextView
         android:id="@+id/decisionText"
@@ -27,15 +27,17 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiktokButton"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.128" />
 
-    <Button
-        android:id="@+id/viewTiktokButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View the tiktok!"
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="243dp"
+        android:layout_height="447dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/decisionText" />
+        app:layout_constraintTop_toBottomOf="@+id/decisionText"
+        app:layout_constraintVertical_bias="0.7" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
