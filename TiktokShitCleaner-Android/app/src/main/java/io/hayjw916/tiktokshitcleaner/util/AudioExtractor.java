@@ -19,8 +19,8 @@ public class AudioExtractor {
 
     public void genVideoUsingMuxer(String srcPath, String dstPath, int startMs, int endMs, boolean useAudio, boolean useVideo) throws IOException {
         MediaExtractor extractor = new MediaExtractor();
-        extractor.setDataSource(srcPath);
-        int trackCount = extractor.getTrackCount();
+        extractor.setDataSource(srcPath); // Extracts the data from the source path
+        int trackCount = extractor.getTrackCount(); // Gets the number of tracks (in our case, one)
 
         MediaMuxer muxer;
         muxer = new MediaMuxer(dstPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
@@ -31,6 +31,7 @@ public class AudioExtractor {
         for (int i = 0; i < trackCount; i++) {
             MediaFormat format = extractor.getTrackFormat(i);
             String mime = format.getString(MediaFormat.KEY_MIME);
+            System.out.println(mime);
             boolean selectCurrentTrack = false;
             if (mime.startsWith("audio/") && useAudio) {
                 selectCurrentTrack = true;
@@ -43,7 +44,7 @@ public class AudioExtractor {
                 indexMap.put(i, dstIndex);
                 if (format.containsKey(MediaFormat.KEY_MAX_INPUT_SIZE)) {
                     int newSize = format.getInteger(MediaFormat.KEY_MAX_INPUT_SIZE);
-                    bufferSize = newSize > bufferSize ? newSize : bufferSize;
+                    bufferSize = Math.max(newSize, bufferSize);
                 }
             }
         }
@@ -51,7 +52,7 @@ public class AudioExtractor {
             bufferSize = DEFAULT_BUFFER_SIZE;
         }
 
-        // Setup orientation and strating time for extractor
+        // Setup orientation and starting time for extractor
         MediaMetadataRetriever retrieverSrc = new MediaMetadataRetriever();
         retrieverSrc.setDataSource(srcPath);
         String degreesString = retrieverSrc.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION);
@@ -93,6 +94,5 @@ public class AudioExtractor {
         }
         muxer.stop();
         muxer.release();
-        return;
     }
 }
