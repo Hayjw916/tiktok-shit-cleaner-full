@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     decisionText.setText("You got a video");
                         new AudioExtractor().genVideoUsingMuxer(RealPathUtil.getRealPath(getApplicationContext(), uri),   getDataDir(getApplicationContext())+ "/bruh.mp3", -1, -1, true, false);
-                    System.out.println("Got video!");
+                    Toast.makeText(MainActivity.this, "Got audio file from video", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
