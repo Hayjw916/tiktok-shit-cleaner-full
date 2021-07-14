@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.hayjw916.tiktokshitcleaner.util.AudioExtractor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     decisionText.setText("You got a video");
                     new NewAudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3");
-                    //new AudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3", -1, -1, true, false);
                     Toast.makeText(MainActivity.this, "Got audio file from video", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
