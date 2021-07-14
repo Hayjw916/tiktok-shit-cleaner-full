@@ -17,7 +17,7 @@ public class AudioExtractor {
     private static final int DEFAULT_BUFFER_SIZE = 1 * 1024 * 1024;
     private static final String TAG = "AudioExtractorDecoder";
 
-    public void genVideoUsingMuxer(String srcPath, String dstPath, int startMs, int endMs, boolean useAudio, boolean useVideo) throws IOException {
+    public void genAudioUsingVideo(String srcPath, String dstPath, int startMs, int endMs, boolean useAudio, boolean useVideo) throws IOException {
         MediaExtractor extractor = new MediaExtractor();
         extractor.setDataSource(srcPath); // Extracts the data from the source path
         int trackCount = extractor.getTrackCount(); // Gets the number of tracks (in our case, one)
