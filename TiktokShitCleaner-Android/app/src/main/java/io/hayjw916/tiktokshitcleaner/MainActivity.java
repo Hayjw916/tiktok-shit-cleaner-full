@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
                     decisionText.setText("This video contains an image!");
                 } else {
                     decisionText.setText("You got a video");
-                    //new NewAudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3");
-                    new AudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3", -1, -1, true, false);
+                    new NewAudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3");
+                    //new AudioExtractor().genAudioUsingVideo(RealPathUtil.getRealPath(getApplicationContext(), uri), getDataDir(getApplicationContext()) + "/bruh.mp3", -1, -1, true, false);
                     Toast.makeText(MainActivity.this, "Got audio file from video", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {

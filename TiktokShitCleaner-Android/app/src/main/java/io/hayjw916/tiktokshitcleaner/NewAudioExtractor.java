@@ -47,8 +47,6 @@ public class NewAudioExtractor {
                     bufferSize = DEFAULT_BUFFER_SIZE; // Just resetting the buffer size to 1048576
                 }
 
-                muxer.setOrientationHint(0); // For some reason, I need to set the orientation of the file since it is outputting to MPEG-4
-
                 // This copies samples from MediaExtractor to the muxer, will loop for copying each sample until it gets to the end of the src file
                 int offset = 0;
                 int trackIndex = -1;
