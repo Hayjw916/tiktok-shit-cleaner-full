@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
-public class NewAudioExtractor {
+public class AudioExtractor {
 
     private static final int DEFAULT_BUFFER_SIZE = (1024 * 1024);
     private static final String TAG = NewAudioExtractor.class.getCanonicalName();
