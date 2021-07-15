@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class AudioExtractor {
 
     private static final int DEFAULT_BUFFER_SIZE = (1024 * 1024);
-    private static final String TAG = NewAudioExtractor.class.getCanonicalName();
+    private static final String TAG = AudioExtractor.class.getCanonicalName();
 
     /**
      * Extracts the audio from the video file
