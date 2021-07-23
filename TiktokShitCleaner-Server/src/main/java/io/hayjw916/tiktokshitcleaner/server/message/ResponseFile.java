@@ -16,16 +16,11 @@ public class ResponseFile {
 
     @Getter
     @Setter
-    private String type;
-
-    @Getter
-    @Setter
     private long size;
 
-    public ResponseFile(String name, String url, String type, long size) {
+    public ResponseFile(String name, String url, long size) {
         this.name = name;
         this.url = url;
-        this.type = type;
         this.size = size;
     }
 }
