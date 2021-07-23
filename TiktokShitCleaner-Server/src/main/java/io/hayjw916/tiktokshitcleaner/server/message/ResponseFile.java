@@ -1,4 +1,4 @@
-package message;
+package io.hayjw916.tiktokshitcleaner.server.message;
 
 import lombok.Getter;
 import lombok.Setter;
