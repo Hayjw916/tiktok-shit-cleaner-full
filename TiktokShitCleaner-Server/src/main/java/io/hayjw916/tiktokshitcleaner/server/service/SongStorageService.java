@@ -21,7 +21,7 @@ public class SongStorageService {
     @Autowired
     public SongDBRepo songDBRepo;
 
-    //
+    @SuppressWarnings("UnusedReturnValue")
     public SongDB store(@NonNull MultipartFile song) throws IOException {
         String songName = StringUtils.cleanPath((Objects.requireNonNull(song.getOriginalFilename())));
         SongDB songDB = new SongDB(songName, song.getContentType(), song.getBytes());
