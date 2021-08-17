@@ -1,8 +1,12 @@
 package io.hayjw916.tiktokshitcleaner.server.service;
 
+import io.hayjw916.tiktokshitcleaner.server.model.SongModel;
+import io.hayjw916.tiktokshitcleaner.server.repo.SongDBRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -10,6 +14,7 @@ import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * The purpose of the SongService is to create a folder that will store
@@ -23,6 +28,9 @@ import java.nio.file.Paths;
  * */
 @Service
 public class SongService {
+
+    @Autowired
+    public SongDBRepo songDBRepo;
 
     /**Same value as song.path in the application.properties file*/
     @Value("${song.path}")
@@ -38,13 +46,20 @@ public class SongService {
         }
     }
 
+    /**This method saves the song to the folder set by song.path*/
     public void saveSong(@NonNull MultipartFile song) {
         try {
             Path dir = Paths.get(songPath);
             if (!Files.exists(dir)) {
                 createSongPath();
             }
-            Files.copy(song.getInputStream(), dir.resolve(song.getOriginalFilename()));
+            Files.copy(song.getInputStream(), dir.resolve(Objects.requireNonNull(song.getOriginalFilename()))); // ik i already have @NonNull but it wouldn't stop bothering me so I added Objects.requireNonNull();
+
+            String songName = StringUtils.cleanPath(Objects.requireNonNull(song.getOriginalFilename()));
+            SongModel songModel = new SongModel(songName, song.getSize(), song.getContentType(), "null"); // i haven't figured out how to get the url yet, once I do I'll add it in
+
+            // Saves the info about the Song to get it later
+            songDBRepo.save(songModel);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Unable to save song " + song.getOriginalFilename());

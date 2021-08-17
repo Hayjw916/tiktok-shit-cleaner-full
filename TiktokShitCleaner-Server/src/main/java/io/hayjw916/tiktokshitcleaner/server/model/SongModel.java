@@ -3,6 +3,11 @@ package io.hayjw916.tiktokshitcleaner.server.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * The SongModel class contains info such as
  * <ul>
@@ -14,7 +19,15 @@ import lombok.Setter;
  *
  * @author Hayden Webber
  * */
+
+@Entity
 public class SongModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @Setter
+    private Integer id;
 
     @Getter
     @Setter
