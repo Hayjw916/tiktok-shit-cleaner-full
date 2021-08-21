@@ -54,15 +54,11 @@ public class SongService {
                 createSongPath();
             }
             Files.copy(song.getInputStream(), dir.resolve(Objects.requireNonNull(song.getOriginalFilename()))); // ik i already have @NonNull but it wouldn't stop bothering me so I added Objects.requireNonNull();
-
-            String songName = StringUtils.cleanPath(Objects.requireNonNull(song.getOriginalFilename()));
-            SongModel songModel = new SongModel(songName, song.getSize(), song.getContentType(), "null"); // i haven't figured out how to get the url yet, once I do I'll add it in
-
-            // Saves the info about the Song to get it later
-            songDBRepo.save(songModel);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Unable to save song " + song.getOriginalFilename());
         }
     }
+
+
 }
