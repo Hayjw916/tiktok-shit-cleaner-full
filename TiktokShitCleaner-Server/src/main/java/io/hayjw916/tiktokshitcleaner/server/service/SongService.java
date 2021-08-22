@@ -1,5 +1,9 @@
 package io.hayjw916.tiktokshitcleaner.server.service;
 
+import javazoom.jl.converter.Converter;
+import javazoom.jl.decoder.JavaLayerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -34,13 +38,15 @@ public class SongService {
     @Value("${song.path}")
     private String songPath;
 
+    private final Logger logger = LoggerFactory.getLogger(SongService.class);
+
     /**This method creates a folder based on the song.path value is in application.properties*/
     public void createSongPath() {
         try {
             Files.createDirectories(Path.of(songPath));
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Unable to create song directory");
+            logger.error("Unable to create a directory");
         }
     }
 
@@ -54,7 +60,7 @@ public class SongService {
             Files.copy(song.getInputStream(), dir.resolve(Objects.requireNonNull(song.getOriginalFilename()))); // ik i already have @NonNull but it wouldn't stop bothering me so I added Objects.requireNonNull();
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Unable to save song " + song.getOriginalFilename());
+            logger.error("Unable to save song: {}", song.getOriginalFilename());
         }
     }
 
@@ -90,6 +96,20 @@ public class SongService {
 
     public void deleteAllSongs() {
         FileSystemUtils.deleteRecursively(Paths.get(songPath).toFile());
+    }
+
+    public void convertToWav(String fileName) {
+        try {
+            if (fileName.contains(".mp4")) {
+                Converter converter = new Converter();
+                converter.convert(fileName, songPath);
+            } else if (fileName.contains(".wav")) {
+                logger.info("File contains .wav, not needed for conversion");
+            }
+        } catch (JavaLayerException e) {
+            logger.error("Unable to convert File: {}" , e.getMessage());
+        }
+
     }
 
 }
