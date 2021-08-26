@@ -36,9 +36,9 @@ public class SongService {
 
     /**Same value as song.path in the application.properties file*/
     @Value("${song.path}")
-    private String songPath;
+    protected String songPath;
 
-    private final Logger logger = LoggerFactory.getLogger(SongService.class);
+    protected final Logger logger = LoggerFactory.getLogger(SongService.class);
 
     /**This method creates a folder based on the song.path value is in application.properties*/
     public void createSongPath() {

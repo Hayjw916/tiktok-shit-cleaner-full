@@ -20,6 +20,7 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'javazoom:jlayer:1.0.1'
+	implementation group: 'com.github.fracpete', name: 'musicg', version: '1.4.2.2'
 }
 
 test {
