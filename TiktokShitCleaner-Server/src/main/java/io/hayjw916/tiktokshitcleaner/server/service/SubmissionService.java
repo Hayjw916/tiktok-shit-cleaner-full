@@ -31,5 +31,14 @@ public class SubmissionService extends SongService {
         }
     }
 
-    
+    /**This method needs to search through all songs in song.path and compare them*/
+    public void compareSongs(String fileName) { // Might change to MutlipartFile but not sure yet
+        try {
+            Path file = Paths.get(submissionPath).resolve(fileName);
+            Path songFiles = Paths.get(songPath);
+             
+        } catch (Exception e) {
+
+        }
+    }
 }
