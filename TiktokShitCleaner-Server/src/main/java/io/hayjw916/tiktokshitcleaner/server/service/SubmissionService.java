@@ -1,5 +1,7 @@
 package io.hayjw916.tiktokshitcleaner.server.service;
 
+import com.musicg.fingerprint.FingerprintSimilarity;
+import com.musicg.wave.Wave;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
@@ -35,8 +37,12 @@ public class SubmissionService extends SongService {
     public void compareSongs(String fileName) { // Might change to MutlipartFile but not sure yet
         try {
             Path file = Paths.get(submissionPath).resolve(fileName);
-            Path songFiles = Paths.get(songPath);
-             
+
+            for (Path song : loadAllSongs()) {
+                FingerprintSimilarity fingerprintSimilarity = new Wave(file.toString()).getFingerprintSimilarity(new Wave(song.toString()));
+            }
+
+
         } catch (Exception e) {
 
         }
