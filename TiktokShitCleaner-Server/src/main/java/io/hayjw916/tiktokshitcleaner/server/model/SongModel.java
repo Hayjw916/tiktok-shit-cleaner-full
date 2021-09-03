@@ -45,10 +45,4 @@ public class SongModel {
     @Setter
     private String fileUrl;
 
-    public SongModel(String fileName, long fileSize, String fileType, String fileUrl) {
-        this.fileName = fileName;
-        this.fileSize = fileSize;
-        this.fileType = fileType;
-        this.fileUrl = fileUrl;
-    }
 }
