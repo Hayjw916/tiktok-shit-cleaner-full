@@ -16,10 +16,4 @@ public class SubmissionModel extends SongModel {
     @Getter
     @Setter
     private boolean isSongGood;
-
-
-    public SubmissionModel(String fileName, long fileSize, String fileType, String fileUrl, boolean isSongGood) {
-        super(fileName, fileSize, fileType, fileUrl);
-        this.isSongGood = isSongGood;
-    }
 }
