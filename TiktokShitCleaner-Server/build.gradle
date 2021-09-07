@@ -14,11 +14,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok:1.18.18'
     runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'javazoom:jlayer:1.0.1'
+	implementation group: 'com.github.fracpete', name: 'musicg', version: '1.4.2.2'
 }
 
 test {
