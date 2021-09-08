@@ -3,6 +3,8 @@ package io.hayjw916.tiktokshitcleaner.server.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 /**
  * The SongModel class contains info such as
@@ -20,7 +22,7 @@ public class SongModel {
 
     @Getter
     @Setter
-    private Integer id;
+    private String uuid = UUID.randomUUID().toString();
 
     @Getter
     @Setter
