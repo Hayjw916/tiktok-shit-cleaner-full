@@ -71,7 +71,7 @@ public class SongController {
 
     @GetMapping("{songname:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> getFile(@PathVariable String songName) {
+    public ResponseEntity<Resource> getSong(@PathVariable String songName) {
         Resource song = songService.loadSong(songName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; songNam=\"" + song.getFilename() + "\"")

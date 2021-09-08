@@ -1,19 +1,15 @@
 package io.hayjw916.tiktokshitcleaner.server.controller;
 
 import io.hayjw916.tiktokshitcleaner.server.messages.UploadResponseMessage;
-import io.hayjw916.tiktokshitcleaner.server.model.SubmissionModel;
 import io.hayjw916.tiktokshitcleaner.server.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("submission")
@@ -33,9 +29,17 @@ public class SubmissionController {
         }
     }
 
-    /*
-    @GetMapping
-    public ResponseEntity<List<SubmissionModel>> listAllSubmissions() {
+    @GetMapping("{submission:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getSubmission(@PathVariable String submissionName) {
+        Resource submission = submissionService.loadSong(submissionName);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; submissionName=\"" + submission.getFilename() + "\"")
+                .body(submission);
+    }
 
-    }*/
+    @DeleteMapping
+    public void deleteSongs() {
+        submissionService.deleteAllSongs();
+    }
 }
