@@ -69,12 +69,21 @@ public class SongController {
         return songModel;
     }
 
-    @GetMapping("{songname:.+}")
+    @GetMapping("{songName:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getSong(@PathVariable String songName) {
         Resource song = songService.loadSong(songName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; songNam=\"" + song.getFilename() + "\"")
+                .body(song);
+    }
+
+    @GetMapping("{uuid:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getSongByUUID(@PathVariable String uuid) {
+        Resource song = songService.loadSong(uuid);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; songUUID=\"" + uuid + "\"")
                 .body(song);
     }
 
