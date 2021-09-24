@@ -78,7 +78,7 @@ public class SongController {
                 .body(song);
     }
 
-    @DeleteMapping
+    @DeleteMapping("")
     public void deleteSongs() {
         songService.deleteAllSongs();
     }
