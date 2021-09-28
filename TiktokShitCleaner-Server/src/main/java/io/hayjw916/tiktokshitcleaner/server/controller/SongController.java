@@ -79,7 +79,14 @@ public class SongController {
     }
 
     @DeleteMapping
-    public void deleteSongs() {
-        songService.deleteAllSongs();
+    public ResponseEntity<UploadResponseMessage> deleteSongs() {
+        try {
+            songService.deleteAllSongs();
+
+            return ResponseEntity.status(HttpStatus.OK).body(new UploadResponseMessage("Deleted all Songs"));
+        } catch (Exception e) {
+            logger.error("There was an error:");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UploadResponseMessage("Unable to Delete all songs"));
+        }
     }
 }
