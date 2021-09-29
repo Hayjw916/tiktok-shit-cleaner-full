@@ -18,7 +18,7 @@ class CreateApplicationProperties {
             case 'windows 10':
                 fileSlash = "\\"
                 break
-            case 'mac':
+            case 'mac os x':
                 fileSlash = "/"
                 break
             case 'linux':
@@ -43,7 +43,5 @@ class CreateApplicationProperties {
         writer.close()
 
 
-        println(userHome)
-        println(file.getAbsolutePath())
     }
 }
