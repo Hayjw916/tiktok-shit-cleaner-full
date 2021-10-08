@@ -58,6 +58,9 @@ public class SongService {
                 createSongPath();
             }
             Files.copy(song.getInputStream(), dir.resolve(Objects.requireNonNull(song.getOriginalFilename()))); // ik i already have @NonNull but it wouldn't stop bothering me so I added Objects.requireNonNull();
+            Path songFilePath = Paths.get(songPath).resolve(song.getOriginalFilename());
+            convertToWav(songFilePath.toString());
+            FileSystemUtils.deleteRecursively(songFilePath);
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("Unable to save song: {}", song.getOriginalFilename());
@@ -98,11 +101,11 @@ public class SongService {
         FileSystemUtils.deleteRecursively(Paths.get(songPath).toFile());
     }
 
-    public void convertToWav(String fileName) {
+    private void convertToWav(String fileName) {
         try {
-            if (fileName.contains(".mp4")) {
+            if (fileName.contains(".mp3")) {
                 Converter converter = new Converter();
-                converter.convert(fileName, songPath);
+                converter.convert(fileName, songPath + "/1.wav");
             } else if (fileName.contains(".wav")) {
                 logger.info("File contains .wav, not needed for conversion");
             }
