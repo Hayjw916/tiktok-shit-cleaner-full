@@ -21,8 +21,14 @@ public class SubmissionController {
     @PostMapping
     public ResponseEntity<UploadResponseMessage> uploadSubmission(@RequestParam("submission") MultipartFile submission) {
         try {
-            submissionService.saveSong(submission);
-            return ResponseEntity.status(HttpStatus.OK).body(new UploadResponseMessage("Uploaded and & saved submission"));
+            submissionService.saveSubmission(submission);
+            String response;
+            if (submissionService.compareSongs(submission.getOriginalFilename())) {
+                response = "Song is like another song";
+            } else {
+                response = "Song is not like another song";
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(new UploadResponseMessage("Uploaded and & saved submission: " + response));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                     .body(new UploadResponseMessage("Unable to upload submission " + submission.getOriginalFilename()));

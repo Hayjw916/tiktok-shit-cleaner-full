@@ -3,7 +3,9 @@ package io.hayjw916.tiktokshitcleaner.server.service;
 import com.musicg.fingerprint.FingerprintSimilarity;
 import com.musicg.wave.Wave;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,6 +29,18 @@ public class SubmissionService extends SongService {
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("Unable to create a directory!");
+        }
+    }
+
+    public void saveSubmission(@NonNull MultipartFile submission) {
+        try {
+            Path dir = Paths.get(submissionPath);
+            if (!Files.exists(dir)) {
+                createSongPath();
+            }
+            Files.copy(submission.getInputStream(), dir.resolve(submission.getOriginalFilename()));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
